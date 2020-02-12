@@ -7,7 +7,6 @@ import NextButton from './nextButton/nextButton';
 import Finished from './finished/finish';
 import './App.css';
 import birdsData from './birdsData';
-import res from './random';
 
 
 let typeOfBirds = [{ active: true, type: "Разминка" },
@@ -23,7 +22,7 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			round: 0,
-			incognitoBirds: res,
+			incognitoBirds: this.random(0, 5),
 			guessed: false,
 			currentChoice: null,
 			showDescription: false,
@@ -84,7 +83,7 @@ class App extends React.Component {
 				this.setState({finished: true})
 				return null
 			}
-			this.setState({ point: 5, guessed: false, correctAnswer: 0, showDescription: false });
+			this.setState({ point: 5, guessed: false, correctAnswer: 0, showDescription: false, incognitoBirds: this.random(0, 5) });
 			this.setState((state) => ({ round: state.round + 1 }));
 			typeOfBirds = this.changeActive(typeOfBirds);
 			const elem = document.querySelectorAll('[data-index]');
@@ -109,7 +108,7 @@ class App extends React.Component {
 	handleRestart() {
 		this.setState({
 			round: 0,
-			incognitoBirds: res,
+			incognitoBirds: this.random(0, 5),
 			guessed: false,
 			currentChoice: null,
 			showDescription: false,
@@ -128,10 +127,11 @@ class App extends React.Component {
 
 	render() {
 		const round = this.state.round;
-		const item = this.state.incognitoBirds;
+		let item = this.state.incognitoBirds;
 		const currentChoice = this.state.currentChoice;
 		const showDescription = this.state.showDescription;
 		const score = this.state.score;
+		console.log(item)
 		return (
 			<div className="wrapper">
 				<Header score={score} type={typeOfBirds} />

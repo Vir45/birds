@@ -618,11 +618,10 @@ li.navbar-active_item {
 @media only screen and (max-width: 430px) {
  
 	.finished, .next-attempt {
-		left: 14%;
+		left: 9%;
 	}
 
 	.finished {
-		left: 14%;
 		width: 290px;
 	}
 
