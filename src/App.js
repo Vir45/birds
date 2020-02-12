@@ -7,6 +7,7 @@ import NextButton from './nextButton/nextButton';
 import Finished from './finished/finish';
 import './App.css';
 import birdsData from './birdsData';
+import res from './random';
 
 
 let typeOfBirds = [{ active: true, type: "Разминка" },
@@ -16,15 +17,6 @@ let typeOfBirds = [{ active: true, type: "Разминка" },
 { active: false, type: "Хищные птицы" },
 { active: false, type: "Морские птицы" }];
 
-
-
-function random(min, max) {
-	let rand = min + Math.random() * (max + 1 - min);
-	return Math.floor(rand);
-}
-
-
-const res = random(0, 5);
 
 class App extends React.Component {
 	constructor(props) {
@@ -36,7 +28,7 @@ class App extends React.Component {
 			currentChoice: null,
 			showDescription: false,
 			score: 0,
-			point: 0,
+			point: 5,
 			correctAnswer: 0,
 			finished: false
 		};
@@ -70,9 +62,6 @@ class App extends React.Component {
 
 		} else {
 			this.setState((state) => ({ point: (state.point - 1) < 0 ? 0 : state.point - 1}))
-			// if (this.state.point < 0) {
-			// 	this.setState({ point: 0 })
-			// }
 			this.setState({ correctAnswer: 3 })
 			elemSpan.style.backgroundColor = '#b22222';
 		}
