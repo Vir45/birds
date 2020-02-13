@@ -17,26 +17,17 @@ let typeOfBirds = [{ active: true, type: "Разминка" },
 { active: false, type: "Морские птицы" }];
 
 
-
-function random(min, max) {
-	let rand = min + Math.random() * (max + 1 - min);
-	return Math.floor(rand);
-}
-
-
-const res = random(0, 5);
-
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			round: 0,
-			incognitoBirds: res,
+			incognitoBirds: this.random(0, 5),
 			guessed: false,
 			currentChoice: null,
 			showDescription: false,
 			score: 0,
-			point: 0,
+			point: 5,
 			correctAnswer: 0,
 			finished: false
 		};
@@ -70,9 +61,6 @@ class App extends React.Component {
 
 		} else {
 			this.setState((state) => ({ point: (state.point - 1) < 0 ? 0 : state.point - 1}))
-			// if (this.state.point < 0) {
-			// 	this.setState({ point: 0 })
-			// }
 			this.setState({ correctAnswer: 3 })
 			elemSpan.style.backgroundColor = '#b22222';
 		}
@@ -95,7 +83,7 @@ class App extends React.Component {
 				this.setState({finished: true})
 				return null
 			}
-			this.setState({ point: 5, guessed: false, correctAnswer: 0, showDescription: false });
+			this.setState({ point: 5, guessed: false, correctAnswer: 0, showDescription: false, incognitoBirds: this.random(0, 5) });
 			this.setState((state) => ({ round: state.round + 1 }));
 			typeOfBirds = this.changeActive(typeOfBirds);
 			const elem = document.querySelectorAll('[data-index]');
@@ -120,7 +108,7 @@ class App extends React.Component {
 	handleRestart() {
 		this.setState({
 			round: 0,
-			incognitoBirds: res,
+			incognitoBirds: this.random(0, 5),
 			guessed: false,
 			currentChoice: null,
 			showDescription: false,
@@ -139,10 +127,11 @@ class App extends React.Component {
 
 	render() {
 		const round = this.state.round;
-		const item = this.state.incognitoBirds;
+		let item = this.state.incognitoBirds;
 		const currentChoice = this.state.currentChoice;
 		const showDescription = this.state.showDescription;
 		const score = this.state.score;
+		console.log(item)
 		return (
 			<div className="wrapper">
 				<Header score={score} type={typeOfBirds} />

@@ -45,6 +45,9 @@ class Player extends React.Component {
 			<AudioPlayer
 			showDownloadProgress={true}
 			progressJumpStep
+			showVolumeControl={true}
+			autoPlay={false}
+			showSkipControls={false}
 				src={way}
 			/>
 		)
